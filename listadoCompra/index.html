@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Listado de útiles</title>
+
+  <!-- css bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+
+  <div class="container">
+    <div id="lista-compras">
+      <div class="header">
+        <h1>{{header.toLocaleUpperCase() }}</h1>
+        <button v-if="estado === 'default'" @click="cambiarEstado('edit')" class="btn btn-primary"> Agregar</button>
+        <button v-else @click="cambiarEstado('default')" class="btn btn-cancel"> Cancelar</button>
+      </div>
+      <div v-if="estado === 'edit'">
+        <input type="text" placeholder="agregar nuevo" v-model="newUtile" @keyup.enter="guardarElemento">
+        <button type="button" class="btn btn-primary" v-bind:disabled="newUtile.length === 0" @click="guardarElemento">Guardar elemento</button>
+      </div>
+      <ul>
+        <li v-for='ele in listarReversa' :class="{tachado : ele.comprado}" @click="cambiarEstadoCompra(ele)"> {{ ele.util }}</li>
+      </ul>
+      <p v-if="utiles.length === 0"> No existen elementos en la lista</p>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="app.js"></script>
+
+
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
